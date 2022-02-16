@@ -11,8 +11,11 @@ source:
 
 build:
   number: 0
-  skip: true  # [win or py27]
-  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
+  skip: true  # [py>=37]
+  script:
+    # HNSWLIB_NO_NATIVE is set to build without "--march=native"
+    - export HNSWLIB_NO_NATIVE=1 && {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv  # [unix]
+    - set HNSWLIB_NO_NATIVE=1 && {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv  # [win]
 
 requirements:
   build:
@@ -42,5 +45,5 @@ about:
 extra:
   recipe-maintainers:
     - yihming
-    - bli25broad
+    - bli25
     - yurymalkov
