@@ -1,5 +1,5 @@
 {% set name = "hnswlib" %}
-{% set version = "0.5.1" %}
+{% set version = "0.6.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,15 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 5598c0a1a6eeb577bc271cac59983c89eb4c1beb1b7e75ba50068e2dc0c038f2
+  sha256: b696d13f3678aa6795d054a0e8c33b3a2c8e14908432aaf4ced7ebef8290a10c
 
 build:
   number: 0
-  skip: True  # [win or py27]
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv"
+  skip: true  # [py>=37]
+  script:
+    # HNSWLIB_NO_NATIVE is set to build without "--march=native"
+    - export HNSWLIB_NO_NATIVE=1 && {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv  # [unix]
+    - set HNSWLIB_NO_NATIVE=1 && {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv  # [win]
 
 requirements:
   build:
@@ -36,11 +39,11 @@ about:
   license: Apache-2.0
   license_family: Apache
   license_file: LICENSE
-  summary: 'Python bindings for Hnswlib, a fast approximate nearest neighbor search package.'
+  summary: Python bindings for Hnswlib, a fast approximate nearest neighbor search package.
   dev_url: https://github.com/nmslib/hnswlib
 
 extra:
   recipe-maintainers:
     - yihming
-    - bli25broad
+    - bli25
     - yurymalkov
