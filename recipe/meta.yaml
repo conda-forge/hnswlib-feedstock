@@ -11,7 +11,7 @@ source:
 
 build:
   number: 1
-  skip: true  # [py>=37]
+  skip: true  # [py<37]
   script:
     # HNSWLIB_NO_NATIVE is set to build without "--march=native"
     - export HNSWLIB_NO_NATIVE=1 && {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv  # [unix]
