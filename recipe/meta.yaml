@@ -10,7 +10,7 @@ source:
   sha256: b696d13f3678aa6795d054a0e8c33b3a2c8e14908432aaf4ced7ebef8290a10c
 
 build:
-  number: 3
+  number: 4
   skip: true  # [py<37]
   script:
     # HNSWLIB_NO_NATIVE is set to build without "--march=native"
