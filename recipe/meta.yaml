@@ -1,5 +1,5 @@
 {% set name = "hnswlib" %}
-{% set version = "0.6.2" %}
+{% set version = "0.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: b696d13f3678aa6795d054a0e8c33b3a2c8e14908432aaf4ced7ebef8290a10c
+  sha256: bc459668e7e44bb7454b256b90c98c5af750653919d9a91698dafcf416cf64c4
 
 build:
-  number: 5
+  number: 0
   skip: true  # [py<37]
   script:
     # HNSWLIB_NO_NATIVE is set to build without "--march=native"
