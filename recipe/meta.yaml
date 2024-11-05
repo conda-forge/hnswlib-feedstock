@@ -12,7 +12,7 @@ source:
     - 0001-Check-before-removing-march-native.patch
 
 build:
-  number: 2
+  number: 3
   script:
     # HNSWLIB_NO_NATIVE is set to build without "--march=native"
     - export HNSWLIB_NO_NATIVE=1 && {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv  # [unix]
@@ -21,6 +21,7 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
+    - {{ stdlib("c") }}
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - python                                 # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
