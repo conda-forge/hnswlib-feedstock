@@ -39,9 +39,14 @@ test:
     - hnswlib
   requires:
     - pip
+  files:
+    - examples/
   commands:
     - pip check
-
+    - python examples/ex01.py
+    - python examples/ex02.py
+    - python examples/ex03.py
+    - python examples/ex04.py
 
 about:
   home: https://github.com/nmslib/hnswlib
