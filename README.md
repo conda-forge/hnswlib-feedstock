@@ -326,6 +326,7 @@ Feedstock Maintainers
 =====================
 
 * [@bli25](https://github.com/bli25/)
+* [@jdblischak](https://github.com/jdblischak/)
 * [@yihming](https://github.com/yihming/)
 * [@yurymalkov](https://github.com/yurymalkov/)
 
