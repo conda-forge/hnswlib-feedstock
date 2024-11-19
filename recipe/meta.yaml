@@ -6,13 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: bc459668e7e44bb7454b256b90c98c5af750653919d9a91698dafcf416cf64c4
   patches:
     - 0001-Check-before-removing-march-native.patch
 
 build:
-  number: 2
+  number: 3
   script:
     # HNSWLIB_NO_NATIVE is set to build without "--march=native"
     - export HNSWLIB_NO_NATIVE=1 && {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv  # [unix]
@@ -21,6 +21,7 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
+    - {{ stdlib("c") }}
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - python                                 # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
@@ -32,16 +33,20 @@ requirements:
     - numpy
   run:
     - python
-    - {{ pin_compatible('numpy') }}
 
 test:
   imports:
     - hnswlib
   requires:
     - pip
+  files:
+    - examples/
   commands:
     - pip check
-
+    - python examples/ex01.py
+    - python examples/ex02.py
+    - python examples/ex03.py
+    - python examples/ex04.py
 
 about:
   home: https://github.com/nmslib/hnswlib
@@ -56,3 +61,4 @@ extra:
     - yihming
     - bli25
     - yurymalkov
+    - jdblischak
