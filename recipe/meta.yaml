@@ -1,5 +1,5 @@
 {% set name = "hnswlib" %}
-{% set version = "0.7.0" %}
+{% set version = "0.8.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: bc459668e7e44bb7454b256b90c98c5af750653919d9a91698dafcf416cf64c4
-  patches:
-    - 0001-Check-before-removing-march-native.patch
+  sha256: cb6d037eedebb34a7134e7dc78966441dfd04c9cf5ee93911be911ced951c44c
 
 build:
-  number: 5
+  number: 0
   script:
     # HNSWLIB_NO_NATIVE is set to build without "--march=native"
     - export HNSWLIB_NO_NATIVE=1 && {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv  # [unix]
