@@ -1,16 +1,16 @@
 {% set name = "hnswlib" %}
-{% set version = "0.8.0" %}
+{% set version = "0.9.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: cb6d037eedebb34a7134e7dc78966441dfd04c9cf5ee93911be911ced951c44c
+  url: https://github.com/nmslib/hnswlib/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 65dfb6639cb7d1acbdaeec1429b978fb657a9bf368ebb8353109167394537823
 
 build:
-  number: 2
+  number: 0
   script:
     # HNSWLIB_NO_NATIVE is set to build without "--march=native"
     - export HNSWLIB_NO_NATIVE=1 && {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv  # [unix]
